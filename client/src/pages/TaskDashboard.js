@@ -82,12 +82,12 @@ const SearchBooks = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Lets get this done</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
                 <Form.Control
-                  name='searchInput'
+                  name='taskInput'
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'

@@ -1,19 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import SearchBooks from './pages/SearchBooks';
+import TaskDash from './pages/TaskDashboard';
 import SavedBooks from './pages/SavedBooks';
-import Navbar from './components/Navbar';
+import Login from './components/Login';
 
 function App() {
   return (
     <Router>
       <>
-        <Navbar />
-        {/* <Switch>
-          <Route exact path='/' component={SearchBooks} />
-          <Route exact path='/saved' component={SavedBooks} />
-          <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-        </Switch> */}
+        <Login />
+        <TaskDash />
       </>
     </Router>
   );
