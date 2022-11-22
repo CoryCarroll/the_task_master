@@ -59,6 +59,21 @@ module.exports = {
       return res.status(400).json(err);
     }
   },
+  async updateTask({ user, body }, res) {
+    console.log(user);
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user._id },
+        { $addToSet: { savedTasks: body } },
+        { new: true, runValidators: true }
+      );
+      return res.json(updatedUser);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
+  },
+
   // removes a task from the tasklist
   async deleteTask({ user, params }, res) {
     const updatedUser = await User.findOneAndUpdate(
@@ -72,3 +87,5 @@ module.exports = {
     return res.json(updatedUser);
   },
 };
+
+

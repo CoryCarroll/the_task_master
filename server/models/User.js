@@ -21,7 +21,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the taskSchema
+    // set savedTasks to be an array of data that adheres to the taskSchema
     savedTasks: [taskSchema],
   },
   // set this to use virtual below
