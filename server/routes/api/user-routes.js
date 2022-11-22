@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const {
   getSingleUser,
-  createUser,
   saveTask,
+  updateTask,
+  createUser,
   deleteTask,
   login,
 } = require('../../controllers/user-controller');
@@ -18,7 +19,8 @@ router.route('/login').post(login);
 router.route('/me').get(authMiddleware, getSingleUser);
 
 router.route('/tasks/:taskId').delete(authMiddleware, deleteTask);
-// TODO check routes if necessary
+// TODO check routes if necessary. "update" may need special attention
+router.route('/tasks/:taskId').update(authMiddleware, updateTask);
 
 
 module.exports = router;
