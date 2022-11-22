@@ -2,7 +2,6 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 // import schema from Book.js
-const taskSchema = require('./Task');
 
 const userSchema = new Schema(
   {
@@ -22,7 +21,13 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedTasks to be an array of data that adheres to the taskSchema
-    savedTasks: [taskSchema],
+    tasks: [
+      {
+      type: Schema.Types.ObjectId,
+      ref: 'Task',
+      required: true
+    },
+  ], 
   },
   // set this to use virtual below
   {
