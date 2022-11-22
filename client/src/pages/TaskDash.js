@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, CardColumns, Card, Button, Form } from 'react-bootstrap';
 
-import { getMe, saveTask, deleteTask, taskData } from '../utils/API';
+import { getMe, deleteTask, createTask} from '../utils/API';
 import Auth from '../utils/auth';
 
 const TaskDash = () => {
@@ -43,14 +43,14 @@ const TaskDash = () => {
           return false;
         }
 
-        const response = await saveTask(taskData, token);
+        const response = await createTask(token);
 
         if (!response.ok) {
           throw new Error('something went wrong!');
         }
 
-        const createTask = await response.json();
-        setUserData(createTask);
+        const createTasks = await response.json();
+        setUserData(createTasks);
 
       } catch (err) {
         console.error(err);
@@ -64,7 +64,7 @@ const TaskDash = () => {
           </h2>
         <Form>
             <textarea className="form-control" id="task" rows="3" title="This field is required" placeholder="Task here" required></textarea>
-          <Button className='submitBtn' onClick={() => getTaskData(taskData.taskId)}>
+          <Button className='submitBtn' onClick={getTaskData}>
             Save
           </Button>
         </Form>
@@ -78,7 +78,7 @@ const TaskDash = () => {
                   <Card.Title>{task.title}</Card.Title>
                   <p className='small'>Authors: {task.authors}</p>
                   <Card.Text>{task.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteTask(task.taskId)}>
+                  <Button className='btn-block btn-danger' onClick={handleDeleteTask(task.taskId)}>
                     Delete this task!
                   </Button>
                 </Card.Body>
