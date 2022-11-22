@@ -1,14 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import TaskDash from './pages/TaskDashboard';
-import Login from './components/Login';
+import loggedOut from './pages/loggedOut';
+import TaskDash from './pages/TaskDash';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
       <>
-        <Login />
-        <TaskDash />
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={loggedOut} />
+          <Route exact path='/tasks' component={TaskDash} />
+          <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+        </Switch>
       </>
     </Router>
   );

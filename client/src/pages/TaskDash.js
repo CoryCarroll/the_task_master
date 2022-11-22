@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import { Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 import { getMe, deleteTask } from '../utils/API';
 import Auth from '../utils/auth';
-// import { removeTaskId } from '../utils/localStorage';
 
-const SavedTask = () => {
+const TaskDash = () => {
   const [userData, setUserData] = useState({});
 
   // use this to determine if `useEffect()` hook needs to run again
@@ -35,9 +34,8 @@ const SavedTask = () => {
 
     getUserData();
   }, [userDataLength]);
-};
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
+  // create function that accepts the task's mongo _id value as param and deletes the task from the database
   const handleDeleteTask = async (taskId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -54,37 +52,11 @@ const SavedTask = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
-      // removeTaskId(taskId);
+
     } catch (err) {
       console.error(err);
     }
   };
-
-  const handleCompleteTask = async (taskId) => {
-    // TODO complete task button logic 
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //   if (!token) {
-  //     return false;
-  //   }
-
-  //   try {
-  //     const response = await deleteTask(taskId, token);
-
-  //     if (!response.ok) {
-  //       throw new Error('something went wrong!');
-  //     }
-
-  //     const updatedUser = await response.json();
-  //     setUserData(updatedUser);
-  //     // upon success, remove book's id from localStorage
-  //     removeTaskId(taskId);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
 
   // if data isn't here yet, say so
   if (!userDataLength) {
@@ -93,30 +65,23 @@ const SavedTask = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
-        <Container>
-          <h1>Viewing saved books!</h1>
-        </Container>
-      </Jumbotron>
       <Container>
         <h2>
-          {userData.savedTasks.length
-            ? `Viewing ${userData.savedTasks.length} saved ${userData.savedTasks.length === 1 ? 'task' : 'tasks'}:`
+          {userData.TaskDash.length
+            ? `Viewing ${userData.TaskDash.length} saved ${userData.TaskDash.length === 1 ? 'task' : 'tasks'}:`
             : 'You have no saved tasks!'}
         </h2>
         <CardColumns>
-          {userData.savedTasks.map((book) => {
+          {userData.TaskDash.map((task) => {
             return (
               <Card key={task.taskId} border='dark'>
+                {task.image ? <Card.Img src={task.image} alt={`The cover for ${task.title}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{task.title}</Card.Title>
-                  <p className='small'> {task.createdAt}</p>
-                  <p className='small'> {task.deadline}</p>
-                  <Button className='btn btn-primary Complete' onClick={() => handleCompleteTask(task.taskId)}>
-                  </Button>
-                  <Card.Text>{book.deadline}</Card.Text>
+                  <p className='small'>Authors: {task.authors}</p>
+                  <Card.Text>{task.description}</Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeleteTask(task.taskId)}>
-                    Delete this Task!
+                    Delete this task!
                   </Button>
                 </Card.Body>
               </Card>
@@ -128,4 +93,31 @@ const SavedTask = () => {
   );
 };
 
-export default savedTask;
+export default TaskDash;
+
+{/* <CardColumns>
+{searchedtasks.map((task) => {
+  return (
+    <Card key={task.taskId} border='dark'>
+      {task.image ? (
+        <Card.Img src={task.image} alt={`The cover for ${task.title}`} variant='top' />
+      ) : null}
+      <Card.Body>
+        <Card.Title>{task.title}</Card.Title>
+        <p className='small'>Authors: {task.authors}</p>
+        <Card.Text>{task.description}</Card.Text>
+        {Auth.loggedIn() && (
+          <Button
+            disabled={savedtaskIds?.some((savedtaskId) => savedtaskId === task.taskId)}
+            className='btn-block btn-info'
+            onClick={() => handleSavetask(task.taskId)}>
+            {savedtaskIds?.some((savedtaskId) => savedtaskId === task.taskId)
+              ? 'This task has already been saved!'
+              : 'Save this task!'}
+          </Button>
+        )}
+      </Card.Body>
+    </Card>
+  );
+})}
+</CardColumns> */}
