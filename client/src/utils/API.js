@@ -30,7 +30,7 @@ export const loginUser = (userData) => {
 
 // save book data for a logged in user
 export const saveTask = (taskData, token) => {
-  return fetch('/api/users', {
+  return fetch('/api/tasks', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export const saveTask = (taskData, token) => {
 
 // remove saved book data for a logged in user
 export const deleteTask = (taskId, token) => {
-  return fetch(`/api/users/tasks/${taskId}`, {
+  return fetch(`/api/tasks/${taskId}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`,
