@@ -20,7 +20,7 @@ const taskSchema = new Schema({
   deadline: {
     // TODO change to date if we implement calendar
     type: String,
-    requied: false,
+    required: false,
   },
   complete: {
     type: Boolean,

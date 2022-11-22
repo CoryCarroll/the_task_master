@@ -14,8 +14,8 @@
 //   }
 // };
 
-// export const removeTaskId = (taskId) => {
-//   const savedTaskIds = localStorage.getItem('saved_books')
+// export const removeBookId = (bookId) => {
+//   const savedBookIds = localStorage.getItem('saved_books')
 //     ? JSON.parse(localStorage.getItem('saved_books'))
 //     : null;
 
