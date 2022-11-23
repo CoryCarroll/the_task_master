@@ -3,7 +3,6 @@ const {
   getSingleUser,
   saveTask,
   createUser,
-  deleteTask,
   login,
 } = require('../../controllers/user-controller');
 
@@ -17,7 +16,6 @@ router.route('/login').post(login);
 
 router.route('/me').get(authMiddleware, getSingleUser);
 
-router.route('/tasks/:taskId').delete(authMiddleware, deleteTask);
 // TODO check routes if necessary. "update" may need special attention
 
 

@@ -23,7 +23,7 @@ module.exports = {
       .then((task) => {
         return User.findOneAndUpdate(
           { _id: req.body.userId },
-          { $addToSet: { task: task._id } },
+          { $addToSet: { tasks: task._id } },
           { new: true }
         );
       })
