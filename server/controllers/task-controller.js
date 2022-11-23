@@ -3,7 +3,7 @@ const { Task, User } = require('../models');
 module.exports = {
     // get all task from db
   getTasks(req, res) {
-    Task.find()
+    Task.find({where:{_id:req.body.userId}})
       .then((task) => res.json(task))
       .catch((err) => res.status(500).json(err));
   },

@@ -49,14 +49,16 @@ function TaskDash() {
   }, [userDataLength]);
 
   const getTaskData = async () => {
+    console.log('Hello')
     try {
       const token = Auth.loggedIn() ? Auth.getToken() : null;
 
       if (!token) {
+        console.log('no token');
         return false;
       }
 
-      const response = await createTask(taskData, token);
+      const response = await createTask({...taskData, userId:userData._id}, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
