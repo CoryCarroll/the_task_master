@@ -11,6 +11,9 @@ const taskSchema = new Schema({
   // TODO add creator field for multiple users
   // TODO add assignedTo 
   // TODO check taskId
+  description: {
+    type: String
+  },
   taskId: {
     type: String,
     required: true,
