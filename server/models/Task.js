@@ -14,10 +14,6 @@ const taskSchema = new Schema({
   description: {
     type: String
   },
-  taskId: {
-    type: String,
-    required: true,
-  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -34,12 +30,12 @@ const taskSchema = new Schema({
   team: {
     type: Schema.Types.ObjectId,
     ref: 'Team',
-    required: true
+    required: false
   },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   }
 
 });
