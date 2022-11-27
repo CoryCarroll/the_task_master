@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, CardColumns, Card, Button, Form } from 'react-bootstrap';
 
-import { getMe, deleteTask, createTask } from '../utils/API';
+import { getMe, createTask, getTasks } from '../utils/API';
 import Auth from '../utils/auth';
 
 function TaskDash() {
@@ -22,7 +22,7 @@ function TaskDash() {
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
-
+  
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -48,7 +48,7 @@ function TaskDash() {
     getUserData();
   }, [userDataLength]);
 
-  const getTaskData = async () => {
+  const createTaskData = async () => {
     console.log('Hello')
     try {
       const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -70,7 +70,7 @@ function TaskDash() {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
   console.log("Hi")
   return (
     <>
@@ -82,22 +82,21 @@ function TaskDash() {
           <textarea className="form-control" id="title" rows="3" title="This field is required" placeholder="Title" required onChange={handleOnChange}></textarea>
           <textarea className="form-control" id="description" rows="3" title="This field is required" placeholder="Description" onChange={handleOnChange}></textarea>
           <textarea className="form-control" id="deadline" rows="3" title="This field is required" placeholder="Deadline" onChange={handleOnChange}></textarea>
-          <Button className='submitBtn' onClick={getTaskData}>
+          <Button className='submitBtn' onClick={createTaskData}>
             Save
           </Button>
         </Form>
       </Container>
       <CardColumns>
-        {userData?.savedTasks?.map((task) => {
+        {userData?.tasks?.map((tasks, id) => {
           return (
-            <Card key={task.taskId} border='dark'>
-              {task.image ? <Card.Img src={task.image} alt={`The cover for ${task.title}`} variant='top' /> : null}
+            <Card key={tasks.id} border='dark'>
               <Card.Body>
-                <Card.Title>{task.title}</Card.Title>
-                <p className='small'>Authors: {task.authors}</p>
-                <Card.Text>{task.description}</Card.Text>
-                {/* <Button className='btn-block btn-danger' onClick={handleDeleteTask(task.taskId)}>
-                    Delete this task!
+                <Card.Title>{tasks.title}</Card.Title>
+                <p className='small'>Authors: {tasks.description}</p>
+                <Card.Text>{tasks.description}</Card.Text>
+                {/* <Button className='btn-block btn-danger' onClick={handleDeleteTask(taskData.taskId)}>
+                    Delete this taskData!
                   </Button> */}
               </Card.Body>
             </Card>
@@ -108,7 +107,7 @@ function TaskDash() {
   )
 
 
-  // create function that accepts the task's mongo _id value as param and deletes the task from the database
+  // create function that accepts the taskData's mongo _id value as param and deletes the taskData from the database
   // const handleDeleteTask = async (taskId) => {
   //   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
