@@ -28,6 +28,7 @@ export const loginUser = (userData) => {
   });
 };
 
+// function used for the creation of a new task
 export const createTask = (taskData, token) => {
   return fetch('/api/tasks', {
     method: 'POST',
@@ -38,6 +39,16 @@ export const createTask = (taskData, token) => {
     body: JSON.stringify(taskData),
   });
 };
+export const getTasks = (token) => {
+  return fetch('/api/tasks', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    }
+  });
+};
+
 // save book data for a logged in user
 export const saveTask = (taskData, token) => {
   return fetch('/api/tasks', {
