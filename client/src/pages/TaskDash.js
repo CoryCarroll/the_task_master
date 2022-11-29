@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Card, Button, Form } from 'react-bootstrap';
 import './TaskDash.css';
-import { getMe, createTask, getTasks, updateTask } from '../utils/API';
+import { getMe, createTask, updateTask } from '../utils/API';
 import Auth from '../utils/auth';
 
 

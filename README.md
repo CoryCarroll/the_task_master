@@ -25,6 +25,10 @@ Cory Carroll, Taylor Terril, and Marshall Jacob.
 
 ## Testing
 
+## links
+GitHub: https://github.com/MarshallJacob/the_task_master
+<br>
+Deployed Application: https://the-task-master-3000.herokuapp.com/
 
 ## License
 Academic
