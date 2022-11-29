@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Card, Button, Form } from 'react-bootstrap';
 import './TaskDash.css';
-import { getMe, createTask, getTasks } from '../utils/API';
+import { getMe, createTask, getTasks, updateTask } from '../utils/API';
 import Auth from '../utils/auth';
 
 
@@ -12,6 +12,18 @@ function TaskDash() {
     description: "",
     deadline: ""
   });
+
+
+  //edit task data
+  const [editTaskData, setEditTaskData] = useState({
+    title: "",
+    description: "",
+    deadline: ""
+  });
+
+  //edit task data
+  const [editTaskId, setEditTaskId] = useState(null);
+
 
   const [checked, setChecked] = useState(
     new Array(userData.length).fill(false)
@@ -26,6 +38,7 @@ function TaskDash() {
   }
   
   
+
   const handleOnChange = (event) => {
     console.log(event.target.id);
     setTaskData({
@@ -36,7 +49,7 @@ function TaskDash() {
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
-  
+
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -60,7 +73,7 @@ function TaskDash() {
     };
 
     getUserData();
-  }, [userDataLength]);
+  }, [userDataLength, editTaskId]);
 
   const createTaskData = async () => {
     console.log('Hello')
@@ -72,7 +85,7 @@ function TaskDash() {
         return false;
       }
 
-      const response = await createTask({...taskData, userId:userData._id}, token);
+      const response = await createTask({ ...taskData, userId: userData._id }, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
@@ -85,7 +98,37 @@ function TaskDash() {
       console.error(err);
     }
   };
-  console.log("Hi")
+
+  //edit task data
+  const handleTaskEdit = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.name;
+    const fieldValue = event.target.value;
+
+    const newTaskData = { ...editTaskData, [fieldName]: fieldValue };
+    // newFormData[fieldName] = fieldValue;
+
+    setEditTaskData(newTaskData);
+  };
+
+  const handleSaveTask = () => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      console.log('no token');
+      return false;
+    }
+
+    setEditTaskId(null)
+    updateTask(editTaskData, token)
+  }
+
+  const handleEditClick = (task) => {
+    setEditTaskData(task)
+    setEditTaskId(task._id)
+  }
+
   return (
     <>
       <Container>
@@ -103,10 +146,46 @@ function TaskDash() {
       </Container>
       <Row className='row' xs={1} md={2}>
         {console.log(userData)}
-        {userData?.tasks?.map(( task ) => {
+        {userData?.tasks?.map((task) => {
           return (
             <Card key={task._id} className='card' border='dark'>
               <Card.Body>
+
+
+                {editTaskId === task._id ?
+                  (<input
+                    type='text'
+                    required='required'
+                    placeholder='Title'
+                    name='title'
+                    onChange={handleTaskEdit}
+                  ></input>)
+                  :
+                  < Card.Title > {task.title} </Card.Title>}
+
+                {editTaskId === task._id ?
+                  (<input
+                    type='text'
+                    required='required'
+                    placeholder='Description'
+                    name='description'
+                    onChange={handleTaskEdit}
+                  ></input>)
+                  :
+                  <p className='small'>{task.description}</p>}
+                {editTaskId === task._id ?
+                  (<input
+                    type='text'
+                    required='required'
+                    placeholder='Deadline'
+                    name='deadline'
+                    onChange={handleTaskEdit}
+                  ></input>)
+                  :
+                  <Card.Text>{task.deadline}</Card.Text>}
+                {editTaskId !== task._id && <Button className='btn-block btn-danger' onClick={() => handleEditClick(task)}>Edit</Button>}
+                {editTaskId === task._id && <Button className='btn-block btn-success' onClick={handleSaveTask}>Save</Button>}
+
                 <Card.Title>{task.title}</Card.Title>
                 <p className='small'>Authors: {task.description}</p>
                 <Card.Text>{task.description}</Card.Text>
@@ -120,6 +199,7 @@ function TaskDash() {
                 {/* <Button className='btn-block btn-danger' onClick={handleDeleteTask(taskData.taskId)}>
                     Delete this taskData!
                   </Button> */}
+
               </Card.Body>
             </Card>
           );
@@ -127,7 +207,6 @@ function TaskDash() {
       </Row>
     </>
   )
-
 
   // create function that accepts the taskData's mongo _id value as param and deletes the taskData from the database
   // const handleDeleteTask = async (taskId) => {
