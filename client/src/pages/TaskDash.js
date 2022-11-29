@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, CardColumns, Card, Button, Form } from 'react-bootstrap';
+import { Container, Row, Card, Button, Form } from 'react-bootstrap';
 import './TaskDash.css';
 import { getMe, createTask, getTasks, updateTask } from '../utils/API';
 import Auth from '../utils/auth';
+
 
 function TaskDash() {
   const [userData, setUserData] = useState({});
@@ -11,6 +12,7 @@ function TaskDash() {
     description: "",
     deadline: ""
   });
+
 
   //edit task data
   const [editTaskData, setEditTaskData] = useState({
@@ -21,6 +23,21 @@ function TaskDash() {
 
   //edit task data
   const [editTaskId, setEditTaskId] = useState(null);
+
+
+  const [checked, setChecked] = useState(
+    new Array(userData.length).fill(false)
+  );
+
+  const handleChange = (task) => {
+    const updatedCheckedState = checked.map((task, index) =>
+      index === task ? !task : task
+    );
+
+    setChecked(updatedCheckedState);
+  }
+  
+  
 
   const handleOnChange = (event) => {
     console.log(event.target.id);
@@ -127,12 +144,13 @@ function TaskDash() {
           </Button>
         </Form>
       </Container>
-      <CardColumns>
+      <Row className='row' xs={1} md={2}>
         {console.log(userData)}
         {userData?.tasks?.map((task) => {
           return (
-            <Card key={task._id} border='dark'>
+            <Card key={task._id} className='card' border='dark'>
               <Card.Body>
+
 
                 {editTaskId === task._id ?
                   (<input
@@ -167,11 +185,26 @@ function TaskDash() {
                   <Card.Text>{task.deadline}</Card.Text>}
                 {editTaskId !== task._id && <Button className='btn-block btn-danger' onClick={() => handleEditClick(task)}>Edit</Button>}
                 {editTaskId === task._id && <Button className='btn-block btn-success' onClick={handleSaveTask}>Save</Button>}
+
+                <Card.Title>{task.title}</Card.Title>
+                <p className='small'>Authors: {task.description}</p>
+                <Card.Text>{task.description}</Card.Text>
+                <input
+                  className='checkBox'
+                  type="checkbox"
+                  id={`custom-checkbox-${task}`}
+                  checked={checked}
+                  onChange={handleChange}
+                />
+                {/* <Button className='btn-block btn-danger' onClick={handleDeleteTask(taskData.taskId)}>
+                    Delete this taskData!
+                  </Button> */}
+
               </Card.Body>
             </Card>
           );
         })}
-      </CardColumns>
+      </Row>
     </>
   )
 

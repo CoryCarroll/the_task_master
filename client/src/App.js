@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './pages/HomePage';
 import loggedOut from './pages/loggedOut';
 import TaskDash from './pages/TaskDash';
 import Navbar from './components/Navbar';
-
+import './App.css'
 function App() {
   return (
     <Router>
