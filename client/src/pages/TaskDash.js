@@ -186,16 +186,12 @@ function TaskDash() {
                 {editTaskId !== task._id && <Button className='btn-block btn-danger' onClick={() => handleEditClick(task)}>Edit</Button>}
                 {editTaskId === task._id && <Button className='btn-block btn-success' onClick={handleSaveTask}>Save</Button>}
 
-                <Card.Title>{task.title}</Card.Title>
-                <p className='small'>Authors: {task.description}</p>
-                <Card.Text>{task.description}</Card.Text>
                 <input
                   className='checkBox'
                   type="checkbox"
                   id={`custom-checkbox-${task}`}
-                  checked={checked}
                   onChange={handleChange}
-                />
+                ></input>
                 {/* <Button className='btn-block btn-danger' onClick={handleDeleteTask(taskData.taskId)}>
                     Delete this taskData!
                   </Button> */}
