@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import Home from './HomePage';
 
 import Auth from '../utils/auth';
 
@@ -20,10 +21,7 @@ const loggedOut = () => {
 
   return (
     <>
-      <Container>
-        <h2>
-        </h2>
-      </Container>
+    <Home/>
     </>
   );
 };
