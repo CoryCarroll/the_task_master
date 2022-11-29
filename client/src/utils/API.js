@@ -70,3 +70,15 @@ export const deleteTask = (taskId, token) => {
     },
   });
 };
+
+export const updateTask = (taskData, token) => {
+  console.log(taskData)
+  return fetch(`/api/tasks/${taskData._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(taskData),
+  })
+}

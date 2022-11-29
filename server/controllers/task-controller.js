@@ -1,7 +1,7 @@
 const { Task, User } = require('../models');
 
 module.exports = {
-    // get all task from db
+  // get all task from db
   getTasks(req, res) {
     Task.find()
       .then((task) => res.json(task))
@@ -17,7 +17,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-//   Handles the creation of a new task
+  //   Handles the creation of a new task
   createTask(req, res) {
     Task.create(req.body)
       .then((task) => {
@@ -30,8 +30,8 @@ module.exports = {
       .then((user) =>
         !user
           ? res.status(404).json({
-              message: 'task created, but found no user with that ID',
-            })
+            message: 'task created, but found no user with that ID',
+          })
           : res.json('Created the task 🎉')
       )
       .catch((err) => {
@@ -39,41 +39,44 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-//   updates the information of an existing task
-// TODO may not be set up correctly
+  //   updates the information of an existing task
+  // TODO may not be set up correctly
   updateTask(req, res) {
+    console.log(req.body)
     Task.findOneAndUpdate(
-      { _id: req.params.taskId },
+      { _id: req.body._id },
       { $set: req.body },
       { runValidators: true, new: true }
     )
-      .then((task) =>
+      .then((task) => {
+        console.log(task)
         !task
           ? res.status(404).json({ message: 'No task with this id!' })
           : res.json(task)
+      }
       )
       .catch((err) => {
         console.log(err);
         res.status(500).json(err);
       });
   },
-//   deletes a task
+  //   deletes a task
   deleteTask(req, res) {
     Task.findOneAndRemove({ _id: req.params.taskId })
       .then((task) =>
         !task
           ? res.status(404).json({ message: 'No task with this id!' })
           : User.findOneAndUpdate(
-              { task: req.params.taskId },
-              { $pull: { task: req.params.taskId } },
-              { new: true }
-            )
+            { task: req.params.taskId },
+            { $pull: { task: req.params.taskId } },
+            { new: true }
+          )
       )
       .then((user) =>
         !user
           ? res.status(404).json({
-              message: 'task created but no user with this id!',
-            })
+            message: 'task created but no user with this id!',
+          })
           : res.json({ message: 'task successfully deleted!' })
       )
       .catch((err) => res.status(500).json(err));
