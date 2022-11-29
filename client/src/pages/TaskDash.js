@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, CardColumns, Card, Button, Form } from 'react-bootstrap';
-
+import './TaskDash.css';
 import { getMe, createTask, getTasks } from '../utils/API';
 import Auth from '../utils/auth';
 
@@ -75,7 +75,7 @@ function TaskDash() {
   return (
     <>
       <Container>
-        <h2>
+        <h2 className='header'>
           Todays Tasks
         </h2>
         <Form>
@@ -87,13 +87,13 @@ function TaskDash() {
           </Button>
         </Form>
       </Container>
-      <CardColumns>
+      <CardColumns className='cardColumn'>
         {userData?.tasks?.map((tasks, id) => {
           return (
             <Card key={tasks.id} border='dark'>
               <Card.Body>
                 <Card.Title>{tasks.title}</Card.Title>
-                <p className='small'>Authors: {tasks.description}</p>
+                <p className='small'> {tasks.description}</p>
                 <Card.Text>{tasks.description}</Card.Text>
                 {/* <Button className='btn-block btn-danger' onClick={handleDeleteTask(taskData.taskId)}>
                     Delete this taskData!

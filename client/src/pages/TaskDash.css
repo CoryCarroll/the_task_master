@@ -1,0 +1,26 @@
+Form {
+  padding: 10px;
+}
+
+#title {
+  font-family: 'Rajdhani', sans-serif;
+  margin-bottom: 10px;
+}
+
+#description {
+  font-family: 'Rajdhani', sans-serif;
+  margin-bottom: 10px;
+}
+
+#deadline {
+  font-family: 'Rajdhani', sans-serif;
+  margin-bottom: 10px;
+}
+
+.header {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.cardColumn {
+  padding: 10px;
+}
