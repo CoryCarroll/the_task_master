@@ -88,13 +88,14 @@ function TaskDash() {
         </Form>
       </Container>
       <CardColumns>
-        {userData?.tasks?.map(({_id, }) => {
+        {console.log(userData)}
+        {userData?.tasks?.map(( task ) => {
           return (
-            <Card key={tasks.id} border='dark'>
+            <Card key={task._id} border='dark'>
               <Card.Body>
-                <Card.Title>{tasks.title}</Card.Title>
-                <p className='small'>Authors: {tasks.description}</p>
-                <Card.Text>{tasks.description}</Card.Text>
+                <Card.Title>{task.title}</Card.Title>
+                <p className='small'>Authors: {task.description}</p>
+                <Card.Text>{task.description}</Card.Text>
                 {/* <Button className='btn-block btn-danger' onClick={handleDeleteTask(taskData.taskId)}>
                     Delete this taskData!
                   </Button> */}
