@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, CardColumns, Card, Button, Form } from 'react-bootstrap';
-
+import './TaskDash.css';
 import { getMe, createTask, getTasks } from '../utils/API';
 import Auth from '../utils/auth';
 
@@ -75,7 +75,7 @@ function TaskDash() {
   return (
     <>
       <Container>
-        <h2>
+        <h2 className='header'>
           Todays Tasks
         </h2>
         <Form>
