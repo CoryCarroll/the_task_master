@@ -88,7 +88,7 @@ function TaskDash() {
         </Form>
       </Container>
       <CardColumns>
-        {userData?.tasks?.map((tasks, id) => {
+        {userData?.tasks?.map(({_id, }) => {
           return (
             <Card key={tasks.id} border='dark'>
               <Card.Body>
