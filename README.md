@@ -26,23 +26,20 @@ Cory Carroll, Taylor Terril, and Marshall Jacob.
 ## Testing
 
 ## links
-GitHub: https://github.com/MarshallJacob/the_task_master
+GitHub: https://github.com/CoryCarroll/the_task_master
 <br>
-Deployed Application: https://the-task-master-3000.herokuapp.com/
+Deployed Application: https://corycarroll.github.io/the_task_master/
 
 ## License
 Academic
 University of Utah
 <br/>
 <br/>
-### If you have any questions you can find us through
+### If you have any questions you can find me through
 <br/>
 Github:
-<br/>
-[MarshallJacob](https://github.com/MarshallJacob)
-<br/>
 [CoryCarroll](https://github.com/CoryCarroll)
-<br/>
-[TaylorTerrill](https://github.com/taylorterrill)
+
+
 
 
