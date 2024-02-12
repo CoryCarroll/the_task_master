@@ -7,10 +7,7 @@ if (!MONGODB_URI) {
   process.exit(1); // Exit the process if MongoDB URI is not set
 }
 
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(MONGODB_URI);
 
 const db = mongoose.connection;
 
