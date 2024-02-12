@@ -14,10 +14,8 @@
   "keywords": [],
   "author": "",
   "license": "",
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  },
   "dependencies": {
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.2"
   }
 }
