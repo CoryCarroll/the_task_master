@@ -1,24 +1,5 @@
 const mongoose = require('mongoose');
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://Cory:Hani1072@taskmaster.tedo0ew.mongodb.net/';
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://Cory:<password>@taskmaster.tedo0ew.mongodb.net/');
 
-if (!MONGODB_URI) {
-  console.error('MongoDB URI is missing. Set the MONGODB_URI environment variable.');
-  process.exit(1); // Exit the process if MongoDB URI is not set
-}
-
-mongoose.connect(MONGODB_URI);
-
-const db = mongoose.connection;
-
-db.on('error', (err) => {
-  console.error(`MongoDB connection error: ${err}`);
-  process.exit(1); // Exit the process on connection error
-});
-
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
-
-module.exports = db;
-
+module.exports = mongoose.connection;
