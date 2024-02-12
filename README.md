@@ -28,7 +28,7 @@ Cory Carroll, Taylor Terril, and Marshall Jacob.
 ## links
 GitHub: https://github.com/CoryCarroll/the_task_master
 <br>
-Deployed Application: https://corycarroll.github.io/the_task_master/
+Deployed Application: https://personal-taskmanager-960825f39bbf.herokuapp.com/
 
 ## License
 Academic
