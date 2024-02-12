@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://Cory:<password>@taskmaster.tedo0ew.mongodb.net/';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://Cory:Hani1072@taskmaster.tedo0ew.mongodb.net/';
 
 if (!MONGODB_URI) {
   console.error('MongoDB URI is missing. Set the MONGODB_URI environment variable.');
