@@ -16,7 +16,8 @@
   "license": "",
   "dependencies": {
     "concurrently": "^8.2.2",
-    "dotenv": "^16.4.2"
+    "dotenv": "^16.4.2",
+    "nodemon": "^3.0.3"
   },
   "homepage": "https://personal-taskmanager-960825f39bbf.herokuapp.com/"
 }
